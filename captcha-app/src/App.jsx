@@ -3,14 +3,13 @@ import { useState, useEffect, useRef } from "react";
 const App = () => {
   const [captchaToken, setCaptchaToken] = useState("");
   const [message, setMessage] = useState("");
-  const captchaRef = useRef(null); // Ref for the CAPTCHA container
+  const captchaRef = useRef(null);
 
   useEffect(() => {
     if (captchaRef.current) {
-      // Dynamically render the Turnstile widget
       window.turnstile.render(captchaRef.current, {
-        sitekey: "0x4AAAAAAA06BQycwfDQvE7T",
-        callback: (token) => setCaptchaToken(token), // Set token on callback
+        sitekey: "",//enter site key here
+        callback: (token) => setCaptchaToken(token),
       });
     }
   }, []);
@@ -46,7 +45,6 @@ const App = () => {
     <div className="App" style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
       <h1>Cloudflare CAPTCHA Verification</h1>
       <form onSubmit={handleSubmit}>
-        {/* CAPTCHA container */}
         <div ref={captchaRef}></div>
         <button type="submit" style={{ marginTop: "20px" }}>
           Verify
